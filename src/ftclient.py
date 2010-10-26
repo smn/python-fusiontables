@@ -10,8 +10,11 @@ Issue requests to Fusion Tables.
 __author__ = 'kbrisbin@google.com (Kathryn Brisbin)'
 
 import urllib2, urllib
-import oauth2
-import authorization.oauth
+try:
+  import oauth2
+  import authorization.oauth
+except: pass
+
 
 
 class FTClient():

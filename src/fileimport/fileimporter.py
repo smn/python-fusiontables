@@ -31,10 +31,12 @@ class CSVImporter(Importer):
     """ Creates new table and imports data from CSV file """
     filehandle = csv.reader(open(filename, "rb"))
     cols = filehandle.next()
-    if data_types: columns_and_types = [(c, d) for c,d in zip(cols, data_types)]
-    else: columns_and_types = [(c, "STRING") for c in cols]
+    if data_types: columns_and_types = dict(zip(cols, data_types))
+    else: columns_and_types = dict([(c, "STRING") for c in cols])
 
-    results = self.ftclient.query(SQL().createTable(table_name or filename, columns_and_types))
+    table = {}
+    table[table_name or filename] = columns_and_types
+    results = self.ftclient.query(SQL().createTable(table))
     table_id = int(results.split()[1])
 
     self._importRows(filehandle, table_id, cols)
