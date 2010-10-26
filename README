@@ -15,13 +15,11 @@ SQL builds SQL statements for you, in case you don't want to fully type out
 "SELECT ..." or "INSERT ..." every time. 
 
 
-DEPENDENCIES*:
+DEPENDENCIES:
 
 - python-oauth2 library: http://github.com/simplegeo/python-oauth2
 - python-oauth2 dependency, httplib2: http://code.google.com/p/httplib2/
 
-*if you are not planning on using OAuth, you can potentially delete the
-authorization/oauth.py file from the library. In this case, no dependencies
-are required.
+
 
 
