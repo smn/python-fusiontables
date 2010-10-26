@@ -17,65 +17,56 @@ token.
 __author__ = 'kbrisbin@google.com (Kathryn Brisbin)'
 
 import oauth2
-import auth
 import urlparse
 
 
-class OAuth(auth.Authorization):
+class OAuth():
+  scope = "http://www.google.com/fusiontables/api/query"
+
   def __init__(self, consumer_key, consumer_secret, domain):
     self.consumer_key = consumer_key
     self.consumer_secret = consumer_secret
     self.domain = domain
-    
+
     self.request_token_url = "https://www.google.com/accounts/OAuthGetRequestToken"
     self.access_token_url = 'https://www.google.com/accounts/OAuthGetAccessToken'
     self.authorize_url = 'https://www.google.com/accounts/OAuthAuthorizeToken'
-    self.scope = "http://www.google.com/fusiontables/api/query"
-    
+
     self.consumer = None
     self.request_token = None
     self.client = None
-  
-        
+
+
   def generateAuthorizationURL(self):
     """ Fetch the OAuthToken and generate the authorization URL.
-    Returns: 
-      the Authorization URL 
+    Returns:
+      the Authorization URL
     """
     self.consumer = oauth2.Consumer(self.consumer_key, self.consumer_secret)
     client = oauth2.Client(self.consumer)
-    
-    resp, content = client.request("%s?scope=%s" % (self.request_token_url, self.scope), "GET")
+
+    resp, content = client.request("%s?scope=%s" % (self.request_token_url, OAuth.scope), "GET")
     if resp['status'] != '200': raise Exception("Invalid response %s." % resp['status'])
-    
+
     self.request_token = dict(urlparse.parse_qsl(content))
 
-    return "%s?oauth_token=%s&scope=%s&domain=%s" % (self.authorize_url, 
-                                                     self.request_token['oauth_token'], 
-                                                     self.scope,
+    return "%s?oauth_token=%s&scope=%s&domain=%s" % (self.authorize_url,
+                                                     self.request_token['oauth_token'],
+                                                     OAuth.scope,
                                                      self.domain)
-  
-  
-  def authorize(self): 
-    """ Upgrade OAuth to Access Token 
+
+
+  def authorize(self):
+    """ Upgrade OAuth to Access Token
+    Returns:
+      the oauth token
+      the token secret
     """
     token = oauth2.Token(self.request_token['oauth_token'], self.request_token['oauth_token_secret'])
     client = oauth2.Client(self.consumer, token)
-    
+
     resp, content = client.request(self.access_token_url, "POST")
     access_token = dict(urlparse.parse_qsl(content))
-    token = oauth2.Token(access_token['oauth_token'], access_token['oauth_token_secret'])
-    self.client = oauth2.Client(self.consumer, token)
-  
-    
-  def Get(self, query):
-    resp, content = self.client.request(uri="%s?%s" % (self.scope, query), 
-                         method="GET")
-    return content
-  
-  
-  def Post(self, query):
-    resp, content = self.client.request(uri=self.scope, 
-                         method="POST", 
-                         body=query)
-    return content
+    return access_token['oauth_token'], access_token['oauth_token_secret']
+
+

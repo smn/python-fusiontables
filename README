@@ -25,25 +25,3 @@ authorization/oauth.py file from the library. In this case, no dependencies
 are required.
 
 
-SAMPLE CODE:
-
-#login and run select query using clientlogin
-clientlogin = ClientLogin(username="username", password="password")
-ftclient = FTClient(clientlogin)
-results = ftclient.query(SQL().select(12345, None, "height > 10")
-
-
-#login and run select query using oauth
-oauth = OAuth(consumer_key="mydomain.com",
-			  consumer_secret="g4i3543/453496052"
-			  domain="mydomain.com")
-print oauth.generateAuthorizationURL()
-raw_input("Visit the URL listed above to grant access. Hit enter to continue")
-oauth.authorize()
-ftclient = FTClient(oauth)
-results = ftclient.query(SQL().select(12345, None, "height > 10")
-
-
-#import data from a CSV file
-csvimporter = CSVImporter(ftclient)
-csvimporter.importFile("input.csv")
