@@ -54,7 +54,7 @@ class SQL:
     """
 
     table_name = table.keys()[0]
-    cols_and_datatypes = ",".join(["'%s': %s" % (unicode(col[0],"utf8"), col[1]) for col in table.get(table_name).items()])
+    cols_and_datatypes = ",".join(["'%s': %s" % (col[0], col[1]) for col in table.get(table_name).items()])
     return "CREATE TABLE '%s' (%s)" % (table_name, cols_and_datatypes)
 
 
@@ -145,7 +145,7 @@ class SQL:
         elif type(value).__name__=='float':
           stringValues += str(value)
         else:
-          stringValues += "'%s'" % (re.sub(r"(?<!\\)'", "\\'", unicode(value, "utf8")))
+          stringValues += "'%s'" % (re.sub(r"(?<!\\)'", "\\'", value))
         if count < len(values): stringValues += ","
         count += 1
 

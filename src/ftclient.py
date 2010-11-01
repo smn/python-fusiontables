@@ -29,10 +29,10 @@ class FTClient():
        lowercase_query.startswith("show") or \
        request_type=="GET":
 
-      return self._get(urllib.urlencode({'sql': query}))
+      return self._get(urllib.urlencode({'sql': query.encode("utf-8")}))
 
     else:
-      return self._post(urllib.urlencode({'sql': query}))
+      return self._post(urllib.urlencode({'sql': query.encode("utf-8")}))
 
 
 class ClientLoginFTClient(FTClient):
