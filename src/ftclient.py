@@ -16,23 +16,27 @@ try:
 except: pass
 
 
-
 class FTClient():
   def _get(self, query): pass
   def _post(self, query): pass
 
   def query(self, query, request_type=None):
     """ Issue a query to the Fusion Tables API and return the result. """
+    
+    #encode to UTF-8
+    try: query = query.encode("utf-8")
+    except: query = query.decode('raw_unicode_escape').encode("utf-8")
+    
     lowercase_query = query.lower()
     if lowercase_query.startswith("select") or \
        lowercase_query.startswith("describe") or \
        lowercase_query.startswith("show") or \
        request_type=="GET":
 
-      return self._get(urllib.urlencode({'sql': query.encode("utf-8")}))
+      return self._get(urllib.urlencode({'sql': query}))
 
     else:
-      return self._post(urllib.urlencode({'sql': query.encode("utf-8")}))
+      return self._post(urllib.urlencode({'sql': query}))
 
 
 class ClientLoginFTClient(FTClient):
