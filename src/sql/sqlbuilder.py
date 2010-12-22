@@ -140,14 +140,14 @@ class SQL:
     cols = values.keys()
     values = values.values()
     for value in values:
-        if type(value).__name__=='int':
-          stringValues = '%s%d' % (stringValues, value)
-        elif type(value).__name__=='float':
-          stringValues = '%s%f' % (stringValues, value)
-        else:
-          stringValues = "%s'%s'" % (stringValues, re.sub(r"(?<!\\)'", "\\'", value))
-        if count < len(values): stringValues = "%s," % (stringValues)
-        count += 1
+      if type(value).__name__=='int':
+        stringValues = '%s%d' % (stringValues, value)
+      elif type(value).__name__=='float':
+        stringValues = '%s%f' % (stringValues, value)
+      else:
+        stringValues = "%s'%s'" % (stringValues, re.sub(r"(?<!\\)'", "\\'", value))
+      if count < len(values): stringValues = "%s," % (stringValues)
+      count += 1
 
     return 'INSERT INTO %d (%s) VALUES (%s)' % (int(table_id), ','.join(["'%s'" % col for col in cols]), stringValues)
 

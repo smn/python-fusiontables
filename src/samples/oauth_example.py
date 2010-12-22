@@ -27,13 +27,17 @@ if __name__ == "__main__":
   print results
   
   #create a table
-  table = {'tablename':{'col1':'STRING', 'col2':'NUMBER', 'col3':'LOCATION'}}
+  table = {'tablename':{'strings':'STRING', 'numbers':'NUMBER', 'locations':'LOCATION'}}
   tableid = int(oauth_client.query(SQL().createTable(table)).split("\n")[1])
   print tableid
   
   #insert row into table
-  rowid = int(oauth_client.query(SQL().insert(tableid, {'col1':'mystring', 'col2': 12, 'col3':'Palo Alto, CA'})).split("\n")[1])
+  rowid = int(oauth_client.query(SQL().insert(tableid, {'strings':'mystring', 'numbers': 12, 'locations':'Palo Alto, CA'})).split("\n")[1])
   print rowid
+  
+  #show rows
+  print oauth_client.query(SQL().select(tableid, None, "numbers=12"))
+
   
   #delete row
   print oauth_client.query(SQL().delete(tableid, rowid))
