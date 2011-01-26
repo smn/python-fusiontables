@@ -22,11 +22,11 @@ class FTClient():
 
   def query(self, query, request_type=None):
     """ Issue a query to the Fusion Tables API and return the result. """
-    
+
     #encode to UTF-8
     try: query = query.encode("utf-8")
     except: query = query.decode('raw_unicode_escape').encode("utf-8")
-    
+
     lowercase_query = query.lower()
     if lowercase_query.startswith("select") or \
        lowercase_query.startswith("describe") or \

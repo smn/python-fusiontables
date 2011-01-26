@@ -17,7 +17,6 @@ token.
 __author__ = 'kbrisbin@google.com (Kathryn Brisbin)'
 
 import oauth2
-import logging
 import urllib
 
 OAUTH_SETTINGS = {

@@ -13,6 +13,7 @@ from fileimport.fileimporter import CSVImporter
 
 
 if __name__ == "__main__":
+
   import sys, getpass
   username = sys.argv[1]
   password = getpass.getpass("Enter your password: ")
@@ -20,6 +21,7 @@ if __name__ == "__main__":
   token = ClientLogin().authorize(username, password)
   ft_client = ftclient.ClientLoginFTClient(token)
 
+  
   #show tables
   results = ft_client.query(SQL().showTables())
   print results
@@ -35,13 +37,13 @@ if __name__ == "__main__":
   
   #show rows
   print ft_client.query(SQL().select(tableid, None, "numbers=12"))
+  print ft_client.query(SQL().select(tableid, ['rowid','numbers'], "numbers=12"))
 
   #delete row
   print ft_client.query(SQL().delete(tableid, rowid))
   
   #drop table
   print ft_client.query(SQL().dropTable(tableid))
-  
   
   #import a table from CSV file
   tableid = int(CSVImporter(ft_client).importFile("data.csv"))

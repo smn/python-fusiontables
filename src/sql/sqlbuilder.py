@@ -54,7 +54,8 @@ class SQL:
     """
 
     table_name = table.keys()[0]
-    cols_and_datatypes = ",".join(["'%s': %s" % (col[0], col[1]) for col in table.get(table_name).items()])
+    cols_and_datatypes = ",".join(["'%s': %s" % (col[0], col[1]) 
+                                   for col in table.get(table_name).items()])
     return "CREATE TABLE '%s' (%s)" % (table_name, cols_and_datatypes)
 
 
@@ -71,7 +72,11 @@ class SQL:
       the sql statement
     """
     stringCols = "*"
-    if cols: stringCols = ','.join(["'%s'" % (col) for col in cols])
+    if cols: 
+      stringCols = ("'%s'" % ("','".join(cols))) \
+        .replace("'rowid'", "rowid") \
+        .replace("'ROWID'", "ROWID")
+
     if condition: select = 'SELECT %s FROM %d WHERE %s' % (stringCols, table_id, condition)
     else: select = 'SELECT %s FROM %d' % (stringCols, table_id)
     return select
