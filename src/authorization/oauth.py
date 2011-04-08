@@ -20,7 +20,7 @@ import oauth2
 import urllib
 
 OAUTH_SETTINGS = {
-  'scope' : "http://www.google.com/fusiontables/api/query",
+  'scope' : "https://www.google.com/fusiontables/api/query",
   'request_token_url':"https://www.google.com/accounts/OAuthGetRequestToken",
   'authorize_url':'https://www.google.com/accounts/OAuthAuthorizeToken',
   'access_token_url':'https://www.google.com/accounts/OAuthGetAccessToken',

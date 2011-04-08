@@ -22,7 +22,6 @@ class Importer:
     pass
 
 
-
 class CSVImporter(Importer):
   def __init__(self, ftclient):
     self.ftclient = ftclient
@@ -52,7 +51,7 @@ class CSVImporter(Importer):
 
   def _importRows(self, filehandle, table_id, cols):
     """ Helper function to upload rows of data in a CSV file to a table """
-    max_per_batch = 500
+    max_per_batch = 100
     current_row = 0
     queries = []
     rows = []
@@ -63,13 +62,20 @@ class CSVImporter(Importer):
       current_row += 1
       if current_row == max_per_batch:
         full_query = ';'.join(queries)
-        rows += self.ftclient.query(full_query).split("\n")[1:-1]
+        try:
+          rows += self.ftclient.query(full_query).split("\n")[1:-1]
+        except:
+          print "query failed" + full_query + "\n"
+          
         current_row = 0
         queries = []
-
+        
     if len(queries) > 0:
       full_query = ';'.join(queries)
-      rows += self.ftclient.query(full_query).split("\n")[1:-1]
+      try:
+        rows += self.ftclient.query(full_query).split("\n")[1:-1]
+      except:
+        print "query failed" + full_query
 
     return rows
 

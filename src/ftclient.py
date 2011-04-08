@@ -43,7 +43,7 @@ class ClientLoginFTClient(FTClient):
 
   def __init__(self, token):
     self.auth_token = token
-    self.request_url = "http://www.google.com/fusiontables/api/query"
+    self.request_url = "https://www.google.com/fusiontables/api/query"
 
   def _get(self, query):
     headers = {
@@ -72,7 +72,7 @@ class OAuthFTClient(FTClient):
     self.consumer_secret = consumer_secret
     self.token = oauth2.Token(oauth_token, oauth_token_secret)
     
-    self.scope = "http://www.google.com/fusiontables/api/query"
+    self.scope = "https://www.google.com/fusiontables/api/query"
 
 
   def _get(self, query):

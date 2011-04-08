@@ -75,6 +75,7 @@ class SQL:
     if cols: stringCols = ("'%s'" % ("','".join(cols))) \
                           .replace("\'rowid\'", "rowid") \
                           .replace("\'ROWID\'", "ROWID")
+
     if condition: select = 'SELECT %s FROM %d WHERE %s' % (stringCols, table_id, condition)
     else: select = 'SELECT %s FROM %d' % (stringCols, table_id)
     return select
