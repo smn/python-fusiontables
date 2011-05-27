@@ -103,7 +103,8 @@ class SQL:
       elif type(values[i]).__name__ == 'float':
         updateStatement = "%s%f" % (updateStatement, values[i])
       else:
-        updateStatement = "%s'%s'" % (updateStatement, values[i])
+        updateStatement = "%s'%s'" % (updateStatement, 
+                                      values[i].encode('string-escape'))
 
       if count < len(cols): updateStatement = "%s," % (updateStatement)
       count += 1
@@ -149,11 +150,13 @@ class SQL:
       elif type(value).__name__=='float':
         stringValues = '%s%f' % (stringValues, value)
       else:
-        stringValues = "%s'%s'" % (stringValues, re.sub(r"(?<!\\)'", "\\'", value))
+        stringValues = "%s'%s'" % (stringValues,
+                                   value.encode('string-escape'))
       if count < len(values): stringValues = "%s," % (stringValues)
       count += 1
 
-    return 'INSERT INTO %d (%s) VALUES (%s)' % (int(table_id), ','.join(["'%s'" % col for col in cols]), stringValues)
+    return 'INSERT INTO %d (%s) VALUES (%s)' % \
+      (int(table_id), ','.join(["'%s'" % col for col in cols]), stringValues)
 
   def dropTable(self, table_id):
     """ Build DROP TABLE sql statement.

@@ -11,7 +11,7 @@ __author__ = 'kbrisbin@google.com (Kathryn Brisbin)'
 
 
 from sql.sqlbuilder import SQL
-import csv
+import csv, time, sys
 
 
 class Importer:
@@ -65,7 +65,9 @@ class CSVImporter(Importer):
         try:
           rows += self.ftclient.query(full_query).split("\n")[1:-1]
         except:
-          print "query failed" + full_query + "\n"
+          print str(sys.exc_info()[1])
+          print full_query + "\n"
+        time.sleep(1)
           
         current_row = 0
         queries = []
@@ -75,7 +77,8 @@ class CSVImporter(Importer):
       try:
         rows += self.ftclient.query(full_query).split("\n")[1:-1]
       except:
-        print "query failed" + full_query
+        print str(sys.exc_info()[1])
+        print full_query
 
     return rows
 
