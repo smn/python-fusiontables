@@ -12,7 +12,7 @@ __author__ = 'kbrisbin@google.com (Kathryn Brisbin)'
 import urllib2, urllib
 try:
   import oauth2
-  import authorization.oauth
+  from fusiontables import authorization
 except: pass
 
 

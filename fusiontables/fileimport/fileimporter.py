@@ -10,7 +10,7 @@ Imports CSV files into Fusion Tables.
 __author__ = 'kbrisbin@google.com (Kathryn Brisbin)'
 
 
-from sql.sqlbuilder import SQL
+from fusiontables.sql.sqlbuilder import SQL
 import csv, time, sys
 
 

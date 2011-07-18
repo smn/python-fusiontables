@@ -5,10 +5,10 @@ Created on Dec 22, 2010
 '''
 
 
-from authorization.clientlogin import ClientLogin
-from sql.sqlbuilder import SQL
-import ftclient
-from fileimport.fileimporter import CSVImporter
+from fusiontables.authorization.clientlogin import ClientLogin
+from fusiontables.sql.sqlbuilder import SQL
+from fusiontables import ftclient
+from fusiontables.fileimport.fileimporter import CSVImporter
 
 
 
@@ -40,14 +40,14 @@ if __name__ == "__main__":
   print ft_client.query(SQL().select(tableid, ['rowid','numbers'], "numbers=12"))
 
   #delete row
-  print ft_client.query(SQL().delete(tableid, rowid))
+  # print ft_client.query(SQL().delete(tableid, rowid))
   
   #drop table
-  print ft_client.query(SQL().dropTable(tableid))
+  # print ft_client.query(SQL().dropTable(tableid))
   
   #import a table from CSV file
   tableid = int(CSVImporter(ft_client).importFile("data.csv"))
   print tableid
   
   #drop table
-  print ft_client.query(SQL().dropTable(tableid))
+  # print ft_client.query(SQL().dropTable(tableid))

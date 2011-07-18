@@ -4,10 +4,10 @@ Created on Dec 22, 2010
 @author: kbrisbin
 '''
 
-from authorization.oauth import OAuth
-from sql.sqlbuilder import SQL
-import ftclient
-from fileimport.fileimporter import CSVImporter
+from fusiontables.authorization.oauth import OAuth
+from fusiontables.sql.sqlbuilder import SQL
+from fusiontables import ftclient
+from fusiontables.fileimport.fileimporter import CSVImporter
 
 
 if __name__ == "__main__":

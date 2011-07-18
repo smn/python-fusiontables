@@ -1,4 +1,5 @@
 OVERVIEW:
+========
 
 The python Fusion Tables Client library helps you connect and run queries on 
 your tables in Fusion Tables.
@@ -16,6 +17,7 @@ SQL builds SQL statements for you, in case you don't want to fully type out
 
 
 DEPENDENCIES:
+=============
 
 - python-oauth2 library: http://github.com/simplegeo/python-oauth2
 - python-oauth2 dependency, httplib2: http://code.google.com/p/httplib2/
