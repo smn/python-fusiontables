@@ -1,5 +1,5 @@
 OVERVIEW:
-========
+=========
 
 The python Fusion Tables Client library helps you connect and run queries on 
 your tables in Fusion Tables.
@@ -15,6 +15,10 @@ CSVImporter allows you to create a new table from an existing CSV file.
 SQL builds SQL statements for you, in case you don't want to fully type out
 "SELECT ..." or "INSERT ..." every time. 
 
+Note
+****
+
+This is a fork of the original python fusion tables client available at http://code.google.com/p/fusion-tables-client-python/, forked it to package it for use with pip & pypi.
 
 DEPENDENCIES:
 =============
