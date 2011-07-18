@@ -26,7 +26,3 @@ DEPENDENCIES:
 - python-oauth2 library: http://github.com/simplegeo/python-oauth2
 - python-oauth2 dependency, httplib2: http://code.google.com/p/httplib2/
 
-
-Python Version: 2.7
-
-
